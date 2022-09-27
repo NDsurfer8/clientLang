@@ -24,3 +24,4 @@ export async function createUser(email, password) {
     return token;
 
 }
+

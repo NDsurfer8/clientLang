@@ -1,13 +1,13 @@
 import { StyleSheet, Text, View, Button } from 'react-native';
 
-function WelcomeScreen({navigation}) {
+function WelcomeScreen({navigation, id}) {
     return (
         <View style={styles.rootContainer}>
             <Text style={styles.title}>Welcome to Langiddy!</Text>
             <Text>Please select a language!</Text>
             <Button
                 title= 'Next'
-                onPress={()=>navigation.navigate('ProfileNav')}
+                onPress={()=>navigation.navigate('ProfileNav',{user: id})}
             />
         </View>
     );

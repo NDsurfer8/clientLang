@@ -7,21 +7,20 @@ import { Foundation } from '@expo/vector-icons';
 import axios from 'axios'
 import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../../../store/auth-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const ProfileInfo = (props) => {
     const { navigation, route } = props
-
     const authCtx = useContext(AuthContext);
     const token = authCtx.token
-
 
     const [userInfo, setUserInfo] = useState([]);
 
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/api/users/`)
-            .then(res => setUserInfo(res.data.user))
+        axios.get(`http://localhost:3000/api/users/${token}`)
+            .then(res => setUserInfo(res.data))
             .catch(err => console.log(err))
     }, [])
 
@@ -30,7 +29,7 @@ const ProfileInfo = (props) => {
         <View style={styles.backgroundColor}>
             <View style={styles.imageContainer}>
                 <View style={styles.infoContainer}>
-                    <Text style={styles.fullNameText}>Noah Duran</Text>
+                    <Text style={styles.fullNameText}>Noah Duran{}</Text>
                     <Text style={styles.nickNameText}>DmanDuran</Text>
                     <Text style={styles.infoText}><Ionicons name="time-outline" size={20} color="black" />Member since dec</Text>
                     <Text style={styles.infoText}><FontAwesome5 name="user-friends" size={17} color="black" />  88 friends</Text>
